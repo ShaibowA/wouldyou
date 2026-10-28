@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Back office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+body{align-items:flex-start}
+main{max-width:680px}
+input[type=text],input[type=email],input[type=password]{width:100%;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:20px;padding:16px 18px;margin-bottom:14px}
+.card h3{margin:0 0 4px;font-size:1.3rem;font-weight:800}
+.card p{margin:0 0 8px;font-size:1rem}
+.card .det{color:var(--ink);white-space:pre-wrap}
+.card .row{margin-top:10px}
+.mini{padding:9px 16px;font-size:.95rem}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:20px}
+.top h1{font-size:2rem;margin:0}
+.newlink{border-color:var(--yes)}
+.newlink code{display:block;word-break:break-all;margin:8px 0;color:var(--yes)}
+.err{color:var(--pink);font-weight:600}
+</style>
+</head>
+<body>
+<main>
+
+<section id="login" class="on">
+  <h1>Back office</h1>
+  <p>Connecte-toi avec le compte créé dans Supabase.</p>
+  <input type="email" id="email" placeholder="Email" autocomplete="username">
+  <input type="password" id="pwd" placeholder="Mot de passe" autocomplete="current-password">
+  <p class="err" id="loginErr"></p>
+  <button class="btn next" id="loginBtn">Se connecter</button>
+</section>
+
+<section id="panel">
+  <div class="top"><h1>Mes liens</h1><button class="btn mini" id="logout">Déconnexion</button></div>
+  <input type="text" id="newName" placeholder="Prénom de la personne" maxlength="40">
+  <button class="btn yes" id="create" style="width:100%;margin-bottom:18px">Créer le lien</button>
+  <div id="fresh"></div>
+  <div class="top"><h2 style="margin:0;font-size:1.4rem">Réponses</h2><button class="btn mini" id="refresh">Actualiser</button></div>
+  <div id="list"></div>
+</section>
+
+</main>
+<script src="config.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const A = CONFIG.SUPABASE_URL, K = CONFIG.SUPABASE_ANON_KEY;
+let jwt = sessionStorage.getItem("jwt") || "";
+const base = location.origin + location.pathname.replace(/admin\.html$/, "");
+const link = t => base + "?t=" + t;
+
+function show(id){ document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === id)); }
+function h(tag, props, ...kids){
+  const e = document.createElement(tag);
+  Object.assign(e, props || {});               // textContent uniquement : pas d’HTML injecté
+  kids.flat().forEach(k => k && e.append(k));
+  return e;
+}
+const api = (path, opts = {}) => fetch(A + path, {...opts, headers: {
+  apikey: K, ...(jwt ? {Authorization: "Bearer " + jwt} : {}),
+  "Content-Type": "application/json", ...(opts.headers || {})}});
+
+async function copy(text, btn){
+  try{ await navigator.clipboard.writeText(text); const o = btn.textContent; btn.textContent = "Copié ✓"; setTimeout(() => btn.textContent = o, 1500); }
+  catch(e){ prompt("Copie ce lien :", text); }
+}
+
+$("loginBtn").onclick = async () => {
+  $("loginErr").textContent = "";
+  const r = await api("/auth/v1/token?grant_type=password", {method:"POST",
+    body: JSON.stringify({email: $("email").value.trim(), password: $("pwd").value})});
+  if(!r.ok){ $("loginErr").textContent = "Email ou mot de passe incorrect."; return; }
+  jwt = (await r.json()).access_token;
+  sessionStorage.setItem("jwt", jwt);
+  load();
+};
+$("logout").onclick = () => { jwt = ""; sessionStorage.removeItem("jwt"); show("login"); };
+$("refresh").onclick = load;
+
+$("create").onclick = async () => {
+  const n = $("newName").value.trim(); if(!n) return;
+  const r = await api("/rest/v1/invitations", {method:"POST", headers:{Prefer:"return=representation"}, body: JSON.stringify({name:n})});
+  if(r.status === 401){ show("login"); return; }
+  const [inv] = await r.json();
+  $("newName").value = "";
+  const url = link(inv.token);
+  const b = h("button", {className:"btn mini", textContent:"Copier le lien"});
+  b.onclick = () => copy(url, b);
+  $("fresh").replaceChildren(h("div", {className:"card newlink"},
+    h("h3", {textContent:"Lien pour " + inv.name}), h("code", {textContent:url}), b));
+  load();
+};
+
+async function load(){
+  const r = await api("/rest/v1/invitations?select=*&order=created_at.desc");
+  if(!r.ok){ show("login"); return; }
+  show("panel");
+  const rows = await r.json();
+  $("list").replaceChildren(...(rows.length ? rows.map(card) : [h("p", {textContent:"Aucun lien pour l’instant."})]));
+}
+
+function card(i){
+  const fmt = d => new Date(d).toLocaleDateString("fr-FR", {weekday:"long", day:"numeric", month:"long"});
+  const status = i.answer === "yes" ? "✅ A dit OUI" : i.opened_at ? "👀 Lien ouvert, pas encore de réponse" : "⏳ Pas encore ouvert";
+  const det = i.answer === "yes"
+    ? "Dispo : " + fmt(i.date + "T12:00") + " (" + (i.slot || "").toLowerCase() + ")\nIdée : " + i.activity + (i.extra ? "\nMessage : " + i.extra : "")
+    : "";
+  const cp = h("button", {className:"btn mini", textContent:"Copier le lien"});
+  cp.onclick = () => copy(link(i.token), cp);
+  const del = h("button", {className:"btn mini ghost", textContent:"Supprimer"});
+  del.onclick = async () => {
+    if(!confirm("Supprimer le lien de " + i.name + " ?")) return;
+    await api("/rest/v1/invitations?token=eq." + encodeURIComponent(i.token), {method:"DELETE"});
+    load();
+  };
+  return h("div", {className:"card"},
+    h("h3", {textContent: i.name}), h("p", {textContent: status}),
+    det && h("p", {className:"det", textContent: det}),
+    h("div", {className:"row"}, cp, del));
+}
+
+if(jwt) load();
+</script>
+</body>
+</html>
