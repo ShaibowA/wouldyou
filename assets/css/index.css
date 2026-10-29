@@ -77,12 +77,6 @@ body {
   border: 2px solid rgba(29, 33, 71, 0.3);
 }
 
-.ronflex {
-  display: block;
-  width: 120px;
-  margin: 0 auto 18px auto;
-}
-
 .deco {
   position: absolute;
   z-index: 3;
@@ -94,14 +88,14 @@ body {
   width: 25rem;
   top: -50px;
   right: -400px;
-  transform: translateY(-40%);
+  transform: translateY(-30%);
   position: absolute;
 }
 
 .deco2 {
   width: 25rem;
   position: absolute;
-  transform: translateY(-45%);
+  transform: translateY(-30%);
   left: -400px;
 }
 
