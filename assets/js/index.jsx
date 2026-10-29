@@ -87,8 +87,7 @@ function App() {
   return (
     <Card>
       <p className="message">
-        {/* Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ?  */}
-        Hi {name} Would you be my valentine ? 
+        Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
       </p>
       <div className="buttons">
         <button className="button button-yes" onClick={goToCalendar}>
