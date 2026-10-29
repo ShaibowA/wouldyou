@@ -5,14 +5,35 @@ var token = new URLSearchParams(window.location.search).get("t");
 
 function Card(props) {
   return (
-    <div className="scene">
-      <img className="deco1" src="assets/img/index/hxh_turret.png" alt="poke"/>
-      <img className="deco2" src="assets/img/index/MHA_turret.png" alt="hxh" />
-      {/* <img className="deco deco3" src="assets/img/perso3.png" alt="" />
-      <img className="deco deco4" src="assets/img/perso4.png" alt="" />
-      <img className="deco deco5" src="assets/img/perso5.png" alt="" />
-      <img className="deco deco6" src="assets/img/perso6.png" alt="" /> */}
+    <div className="page">
+      <div className="cloud cloud-left"></div>
+      <div className="cloud cloud-right"></div>
+
+      <span className="star star1">✦</span>
+      <span className="star star2">✧</span>
+
+      <img className="side side-left" src="assets/img/index/MHA_turret.png" alt="" />
+      <img className="side side-right" src="assets/img/index/hxh_turret.png" alt="" />
+
       <main className="card">{props.children}</main>
+    </div>
+  );
+}
+
+function Invitation(props) {
+  return (
+    <div>
+      <img className="mascot" src="assets/img/index/squirtle_flower.png" alt="" />
+      <h1 className="title">Coucou {props.name} !</h1>
+      <p className="message">Est-ce que tu voudrais sortir un de ces quatre ?</p>
+      <div className="buttons">
+        <button className="button button-yes" onClick={props.onYes}>
+          Avec plaisir ! ♥
+        </button>
+        <button className="button button-outline" onClick={props.onNo}>
+          Une autre fois
+        </button>
+      </div>
     </div>
   );
 }
@@ -68,8 +89,7 @@ function App() {
   if (status === "invalid") {
     return (
       <Card>
-        <img className="ronflex" src="assets/img/index/squirtle_flower.png"/>
-        <p className="message">Coucou fauia, est-ce que tu voudrais sortir un de ces quatres ?</p>
+        <p className="message">Ce lien ne marche pas.</p>
       </Card>
     );
   }
@@ -77,7 +97,7 @@ function App() {
   if (status === "answered") {
     return (
       <Card>
-        <p className="message">Tu as déjà répondu au formulaire, si jamais tu as une question tu peux directement m'écrire sur mon numéro</p>
+        <p className="message">Tu as déjà répondu au formulaire, si jamais tu as une question tu peux directement m’écrire sur mon numéro</p>
       </Card>
     );
   }
@@ -85,10 +105,10 @@ function App() {
   if (declined === true) {
     return (
       <Card>
-        <p className="message">Bon c'est pas grave, j'aurais tenté, tant pis </p>
+        <p className="message">Bon c’est pas grave, j’aurais tenté, tant pis</p>
         <div className="buttons">
           <button className="button button-outline" onClick={sayOops}>
-            Oups, j’ai cliqué trop vite
+            J’ai changé d’avis
           </button>
         </div>
       </Card>
@@ -97,18 +117,7 @@ function App() {
 
   return (
     <Card>
-      <img className="ronflex" src="assets/img/index/squirtle_flower.png"/>
-      <p className="message">
-        Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
-      </p>
-      <div className="buttons">
-        <button className="button button-yes" onClick={goToCalendar}>
-          Oui
-        </button>
-        <button className="button" onClick={sayNo}>
-          Non
-        </button>
-      </div>
+      <Invitation name={name} onYes={goToCalendar} onNo={sayNo} />
     </Card>
   );
 }
