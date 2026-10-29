@@ -7,7 +7,7 @@ function Card(props) {
   return (
     <div className="scene">
       <img className="deco1" src="assets/img/index/turret_pokemon.png" alt="poke"/>
-      <img className="deco2" src="assets/img/index/MHA_turret.png" alt="mha" />
+      <img className="deco2" src="assets/img/index/hxh_turret.png" alt="hxh" />
       {/* <img className="deco deco3" src="assets/img/perso3.png" alt="" />
       <img className="deco deco4" src="assets/img/perso4.png" alt="" />
       <img className="deco deco5" src="assets/img/perso5.png" alt="" />

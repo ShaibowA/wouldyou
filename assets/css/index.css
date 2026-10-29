@@ -83,26 +83,20 @@ body {
   margin: 0 auto 18px auto;
 }
 
-.deco {
-  position: absolute;
-  z-index: 3;
-  width: 90px;
-  pointer-events: none;
-}
-
 .deco1 {
   width: 25rem;
   top: -50px;
   right: -400px;
   transform: translateY(-40%);
   position: absolute;
-}
+  margin-top: 10rem;}
 
 .deco2 {
   width: 25rem;
   position: absolute;
   transform: translateY(-45%);
   left: -400px;
+  margin-top: 10rem;
 }
 
 .deco3 {
