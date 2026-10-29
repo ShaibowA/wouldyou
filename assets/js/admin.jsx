@@ -29,8 +29,18 @@ function Invitation(props) {
     }
   }
 
-  function copy() {
-    props.onCopy(item.token);
+  var [copyLabel, setCopyLabel] = useState("Copier le lien");
+
+  async function copy() {
+    var ok = await props.onCopy(item.token);
+    if (ok === true) {
+      setCopyLabel("Copié ✓");
+    } else {
+      setCopyLabel("Copie impossible");
+    }
+    setTimeout(function () {
+      setCopyLabel("Copier le lien");
+    }, 1500);
   }
 
   function remove() {
@@ -43,7 +53,7 @@ function Invitation(props) {
       <p>{status}</p>
       {details !== "" ? <p className="details">{details}</p> : null}
       <div className="card-buttons">
-        <button className="button button-small" onClick={copy}>Copier le lien</button>
+        <button className="button button-small" onClick={copy}>{copyLabel}</button>
         <button className="button button-small button-light" onClick={remove}>Supprimer</button>
       </div>
     </div>
@@ -58,6 +68,7 @@ function App() {
   var [newName, setNewName] = useState("");
   var [freshName, setFreshName] = useState("");
   var [freshLink, setFreshLink] = useState("");
+  var [freshLabel, setFreshLabel] = useState("Copier le lien");
   var [list, setList] = useState([]);
 
   useEffect(function () {
@@ -118,20 +129,33 @@ function App() {
     setNewName("");
     loadList();
   }
-  
-  function copyFreshLink() {
-    copyText(freshLink);
+
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  async function copyFreshLink() {
+    var ok = await copyText(freshLink);
+    if (ok === true) {
+      setFreshLabel("Copié ✓");
+    } else {
+      setFreshLabel("Copie impossible");
+    }
+    setTimeout(function () {
+      setFreshLabel("Copier le lien");
+    }, 1500);
   }
 
   function copyLink(token) {
-    copyText(getLink(token));
+    return copyText(getLink(token));
   }
 
   async function deleteLink(item) {
-    var sure = window.confirm("Supprimer le lien de " + item.name + " ?");
-    if (sure === false) {
-      return;
-    }
     await deleteInvitation(item.token);
     loadList();
   }
@@ -139,11 +163,12 @@ function App() {
   if (logged === false) {
     return (
       <main className="page">
-        <h1>Data</h1>
+        <h1>Back office</h1>
+        <p>Connecte-toi avec ton compte Supabase.</p>
         <input type="email" placeholder="Email" value={email} onChange={changeEmail} />
         <input type="password" placeholder="Mot de passe" value={password} onChange={changePassword} />
         {loginError !== "" ? <p className="error">{loginError}</p> : null}
-        <button className="button" onClick={handleLogin}>log in</button>
+        <button className="button" onClick={handleLogin}>Se connecter</button>
       </main>
     );
   }
@@ -173,7 +198,7 @@ function App() {
         <div className="card new-link">
           <h3>Lien pour {freshName}</h3>
           <p className="link">{freshLink}</p>
-          <button className="button button-small" onClick={copyFreshLink}>Copier le lien</button>
+          <button className="button button-small" onClick={copyFreshLink}>{freshLabel}</button>
         </div>
       ) : null}
 

@@ -192,6 +192,14 @@ function App() {
     setTime(newTime);
   }
 
+  function goBack() {
+    window.location.href = "index.html?t=" + encodeURIComponent(token);
+  }
+
+  function backToCalendar() {
+    setSaved(false);
+  }
+
   function validateSlot() {
     var choice = { date: date, time: time };
     sessionStorage.setItem("rdv", JSON.stringify(choice));
@@ -237,6 +245,7 @@ function App() {
         <p className="title">Noté ✓</p>
         <p className="text">{dateText} à {time}</p>
         <p className="text">La suite arrive bientôt...</p>
+        <button className="button-back" onClick={backToCalendar}>← Retour</button>
       </main>
     );
   }
@@ -250,6 +259,9 @@ function App() {
 
   return (
     <main className="card">
+      <div className="back-line">
+        <button className="button-back" onClick={goBack}>← Retour</button>
+      </div>
       <h1 className="title">Parfait ! Quand es-tu dispo ?</h1>
 
       <Calendar selected={date} onPick={pickDate} />

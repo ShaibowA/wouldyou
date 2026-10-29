@@ -195,3 +195,18 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+.back-line {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.button-back {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(29, 33, 71, 0.1);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
