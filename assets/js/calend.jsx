@@ -82,7 +82,7 @@ function Calendar(props) {
   var boxes = [];
 
   for (var i = 0; i < emptyBoxes; i++) {
-    boxes.push(<span key={"empty" + i}></span>);
+    boxes.push(<span key={"empty" + i} className="empty"></span>);
   }
 
   for (var day = 1; day <= daysInMonth; day++) {
@@ -96,6 +96,10 @@ function Calendar(props) {
         onPick={props.onPick}
       />
     );
+  }
+  
+  while (boxes.length < 42) {
+    boxes.push(<span key={"end" + boxes.length} className="empty"></span>);
   }
 
   var weekdayNames = WEEKDAYS.map(function (name) {
