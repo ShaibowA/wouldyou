@@ -73,9 +73,17 @@ async function copy(text, btn){
 
 $("loginBtn").onclick = async () => {
   $("loginErr").textContent = "";
-  const r = await api("/auth/v1/token?grant_type=password", {method:"POST",
-    body: JSON.stringify({email: $("email").value.trim(), password: $("pwd").value})});
-  if(!r.ok){ $("loginErr").textContent = "Email ou mot de passe incorrect."; return; }
+  if(!A || !K){ $("loginErr").textContent = "config.js est vide : colle SUPABASE_URL et SUPABASE_ANON_KEY, puis mets-le à jour sur GitHub."; return; }
+  let r;
+  try{
+    r = await api("/auth/v1/token?grant_type=password", {method:"POST",
+      body: JSON.stringify({email: $("email").value.trim(), password: $("pwd").value})});
+  }catch(e){ $("loginErr").textContent = "Impossible de joindre Supabase : vérifie SUPABASE_URL dans config.js."; return; }
+  if(!r.ok){
+    let msg = ""; try{ const j = await r.json(); msg = j.error_description || j.msg || j.message || ""; }catch(e){}
+    $("loginErr").textContent = "Échec (" + r.status + ") : " + (msg || "réponse inattendue");
+    return;
+  }
   jwt = (await r.json()).access_token;
   sessionStorage.setItem("jwt", jwt);
   load();
