@@ -2,9 +2,11 @@ const $ = id => document.getElementById(id);
 const st = {slot:"", act:""};
 let name = "", recapText = "";
 const token = new URLSearchParams(location.search).get("t");
-const HDR = {apikey: CONFIG.SUPABASE_ANON_KEY, "Content-Type": "application/json"};
+let BASE = (CONFIG.SUPABASE_URL || "").trim();
+try{ BASE = new URL(BASE).origin; }catch(e){}   
+const HDR = {apikey: (CONFIG.SUPABASE_ANON_KEY || "").trim(), "Content-Type": "application/json"};
 const rpc = (fn, args) =>
-  fetch(CONFIG.SUPABASE_URL + "/rest/v1/rpc/" + fn, {method:"POST", headers:HDR, body:JSON.stringify(args)})
+  fetch(BASE + "/rest/v1/rpc/" + fn, {method:"POST", headers:HDR, body:JSON.stringify(args)})
     .then(r => { if(!r.ok) throw new Error(fn); return r.json(); });
 
 function show(id){ document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === id)); }
@@ -39,7 +41,6 @@ pick("slots","slot"); pick("acts","act");
 $("date").min = new Date().toISOString().slice(0,10);
 $("date").addEventListener("input", check);
 
-// Chargement : on vérifie le lien et on récupère le prénom
 if(!token){ show("invalid"); }
 else rpc("open_invitation", {p_token: token}).then(inv => {
   if(!inv){ show("invalid"); return; }

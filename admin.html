@@ -50,7 +50,9 @@ input[type=text],input[type=email],input[type=password]{width:100%;background:va
 <script src="config.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-const A = CONFIG.SUPABASE_URL, K = CONFIG.SUPABASE_ANON_KEY;
+let A = (CONFIG.SUPABASE_URL || "").trim();
+try{ A = new URL(A).origin; }catch(e){}   // garde seulement https://xxx.supabase.co
+const K = (CONFIG.SUPABASE_ANON_KEY || "").trim();
 let jwt = sessionStorage.getItem("jwt") || "";
 const base = location.origin + location.pathname.replace(/admin\.html$/, "");
 const link = t => base + "?t=" + t;
