@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   function goToCalendar() {
-    window.location.href = "calendar.html?t=" + encodeURIComponent(token);
+    window.location.href = "calend.html?t=" + encodeURIComponent(token);
   }
 
   function sayNo() {
