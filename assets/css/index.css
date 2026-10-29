@@ -91,15 +91,18 @@ body {
 }
 
 .deco1 {
-  top: -45px;
-  left: -35px;
-  transform: rotate(-15deg);
+  width: 25rem;
+  top: -50px;
+  right: -400px;
+  transform: translateY(-40%);
+  position: absolute;
 }
 
 .deco2 {
-  top: -50px;
-  right: -30px;
-  transform: rotate(15deg);
+  width: 25rem;
+  position: absolute;
+  transform: translateY(-45%);
+  left: -400px;
 }
 
 .deco3 {
@@ -124,42 +127,4 @@ body {
   bottom: -50px;
   right: -30px;
   transform: rotate(-10deg);
-}
-
-@media (max-width: 600px) {
-  .message {
-    font-size: 24px;
-  }
-
-  .deco {
-    width: 60px;
-  }
-
-  .deco1 {
-    top: -30px;
-    left: -15px;
-  }
-
-  .deco2 {
-    top: -30px;
-    right: -15px;
-  }
-
-  .deco3 {
-    left: -18px;
-  }
-
-  .deco4 {
-    right: -18px;
-  }
-
-  .deco5 {
-    bottom: -30px;
-    left: -15px;
-  }
-
-  .deco6 {
-    bottom: -30px;
-    right: -15px;
-  }
 }

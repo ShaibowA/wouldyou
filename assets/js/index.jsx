@@ -6,9 +6,9 @@ var token = new URLSearchParams(window.location.search).get("t");
 function Card(props) {
   return (
     <div className="scene">
-      <img className="deco1" src="assets/img/index/six_sponge.jpg" alt="poke"/>
-      {/* <img className="deco deco2" src="assets/img/perso2.png" alt="" />
-      <img className="deco deco3" src="assets/img/perso3.png" alt="" />
+      <img className="deco1" src="assets/img/index/turret_pokemon.png" alt="poke"/>
+      <img className="deco2" src="assets/img/index/MHA_turret.png" alt="mha" />
+      {/* <img className="deco deco3" src="assets/img/perso3.png" alt="" />
       <img className="deco deco4" src="assets/img/perso4.png" alt="" />
       <img className="deco deco5" src="assets/img/perso5.png" alt="" />
       <img className="deco deco6" src="assets/img/perso6.png" alt="" /> */}
