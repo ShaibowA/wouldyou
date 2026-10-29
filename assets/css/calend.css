@@ -216,7 +216,7 @@ button {
 }
 
 .side {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   bottom: 10%;
   height: 60vh;
@@ -245,7 +245,7 @@ button {
 }
 
 .star {
-  position: absolute;
+  position: fixed;
   color: white;
   font-size: 30px;
 }
@@ -261,7 +261,7 @@ button {
 }
 
 .cloud {
-  position: absolute;
+  position: fixed;
   bottom: -140px;
   width: 400px;
   height: 250px;

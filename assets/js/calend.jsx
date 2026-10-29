@@ -11,7 +11,7 @@ var MONTHS = [
 var WEEKDAYS = ["lun", "mar", "mer", "jeu", "ven", "sam", "dim"];
 
 var TIMES = [];
-for (var hour = 10; hour < 20; hour++) {
+for (var hour = 10; hour < 17; hour++) {
   TIMES.push(pad(hour) + ":00");
   TIMES.push(pad(hour) + ":30");
 }
