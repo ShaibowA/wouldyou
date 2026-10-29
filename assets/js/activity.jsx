@@ -34,7 +34,7 @@ function Scene(props) {
       <span className="star star2">✧</span>
 
       <img className="frame frame-left" src="assets/img/activity/kmny.png" alt="" />
-      <img className="frame frame-right" src="assets/img/activity/kmny.png" alt="" />
+      {/* <img className="frame frame-right" src="assets/img/activity/kmny.png" alt="" /> */}
       <main className="card">{props.children}</main>
     </div>
   );
