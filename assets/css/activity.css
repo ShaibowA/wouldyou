@@ -218,7 +218,6 @@ body {
 
 .frame-left {
   left: 0;
-  clip-path: inset(0 20% 0 0);
 }
 
 .frame-right {
