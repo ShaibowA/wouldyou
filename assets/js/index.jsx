@@ -86,12 +86,13 @@ function App() {
 
   return (
     <Card>
+      <img className="image" src="assets/img/ronflex"/>
       <p className="message">
         Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
       </p>
       <div className="buttons">
         <button className="button button-yes" onClick={goToCalendar}>
-          Oui 💛
+          Oui
         </button>
         <button className="button" onClick={sayNo}>
           Non
