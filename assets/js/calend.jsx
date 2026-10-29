@@ -155,6 +155,23 @@ function Times(props) {
   return <div className="times">{buttons}</div>;
 }
 
+function Scene(props) {
+  return (
+    <div className="page">
+      <div className="cloud cloud-left"></div>
+      <div className="cloud cloud-right"></div>
+
+      <span className="star star1">✦</span>
+      <span className="star star2">✧</span>
+
+      <img className="side side-left" src="assets/img/calend/vegeta.jpg" alt="" />
+      <img className="side side-right" src="assets/img/calend/goku_montain.jpg" alt="" />
+
+      <Scene>{props.children}</Scene>
+    </div>
+  );
+}
+
 function App() {
   var [status, setStatus] = useState("loading");
   var [date, setDate] = useState("");
@@ -208,25 +225,25 @@ function App() {
 
   if (status === "loading") {
     return (
-      <main className="card">
+      <Scene>
         <p className="title">...</p>
-      </main>
+      </Scene>
     );
   }
 
   if (status === "invalid") {
     return (
-      <main className="card">
+      <Scene>
         <p className="title">Ce lien ne marche pas.</p>
-      </main>
+      </Scene>
     );
   }
 
   if (status === "answered") {
     return (
-      <main className="card">
+      <Scene>
         <p className="title">Tu as déjà répondu 💌</p>
-      </main>
+      </Scene>
     );
   }
 
@@ -253,7 +270,7 @@ function App() {
   var canValidate = date !== "" && time !== "";
 
   return (
-    <main className="card">
+    <Scene>
       <div className="back-line">
         <button className="button-back" onClick={goBack}>← Retour</button>
       </div>
@@ -274,7 +291,7 @@ function App() {
           Valider ce créneau
         </button>
       </div>
-    </main>
+    </Scene>
   );
 }
 
