@@ -78,3 +78,91 @@ body {
   width: 120px;
   margin: 0 auto 18px auto;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 40px auto;
+}
+
+.deco {
+  position: absolute;
+  z-index: 1;
+  width: 90px;
+  pointer-events: none;
+}
+
+.deco1 {
+  top: -45px;
+  left: -35px;
+  transform: rotate(-15deg);
+}
+
+.deco2 {
+  top: -50px;
+  right: -30px;
+  transform: rotate(15deg);
+}
+
+.deco3 {
+  top: 50%;
+  left: -55px;
+  transform: translateY(-50%) rotate(-8deg);
+}
+
+.deco4 {
+  top: 50%;
+  right: -55px;
+  transform: translateY(-50%) rotate(8deg);
+}
+
+.deco5 {
+  bottom: -45px;
+  left: -25px;
+  transform: rotate(10deg);
+}
+
+.deco6 {
+  bottom: -50px;
+  right: -30px;
+  transform: rotate(-10deg);
+}
+
+@media (max-width: 600px) {
+  .deco {
+    width: 60px;
+  }
+
+  .deco1 {
+    top: -30px;
+    left: -15px;
+  }
+
+  .deco2 {
+    top: -30px;
+    right: -15px;
+  }
+
+  .deco3 {
+    left: -18px;
+  }
+
+  .deco4 {
+    right: -18px;
+  }
+
+  .deco5 {
+    bottom: -30px;
+    left: -15px;
+  }
+
+  .deco6 {
+    bottom: -30px;
+    right: -15px;
+  }
+}

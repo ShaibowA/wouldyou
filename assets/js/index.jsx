@@ -4,7 +4,17 @@ var useEffect = React.useEffect;
 var token = new URLSearchParams(window.location.search).get("t");
 
 function Card(props) {
-  return <main className="card">{props.children}</main>;
+  return (
+    <div className="img_index">
+      <img className="deco deco1" src="assets/img/height_pokemon.png"/>
+      <img className="deco deco2" src="assets/img/perso2.png" alt="" />
+      <img className="deco deco3" src="assets/img/perso3.png" alt="" />
+      <img className="deco deco4" src="assets/img/perso4.png" alt="" />
+      <img className="deco deco5" src="assets/img/perso5.png" alt="" />
+      <img className="deco deco6" src="assets/img/perso6.png" alt="" />
+      <main className="card">{props.children}</main>;
+    </div>
+  );
 }
 
 function App() {
@@ -86,7 +96,7 @@ function App() {
 
   return (
     <Card>
-      <img className="ronflex" src="assets/img/ronflex.jpg"/>
+      <img className="ronflex" src="assets/img/squirtle_flower.jpg"/>
       <p className="message">
         Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
       </p>
