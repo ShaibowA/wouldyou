@@ -29,6 +29,17 @@ function Invitation(props) {
     }
   }
 
+    var openedText = "";
+  if (item.opened_at !== null) {
+    openedText = "Ouvert le " + new Date(item.opened_at).toLocaleString("fr-FR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+  }
+
   var [copyLabel, setCopyLabel] = useState("Copier le lien");
 
   async function copy() {
@@ -51,6 +62,7 @@ function Invitation(props) {
     <div className="card">
       <h3>{item.name}</h3>
       <p>{status}</p>
+      {openedText !== "" ? <p>{openedText}</p> : null}
       {details !== "" ? <p className="details">{details}</p> : null}
       <div className="card-buttons">
         <button className="button button-small" onClick={copy}>{copyLabel}</button>
