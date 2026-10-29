@@ -24,14 +24,14 @@ function Invitation(props) {
   return (
     <div>
       <img className="mascot" src="assets/img/index/squirtle_flower.png" alt="" />
-      <h1 className="title">Coucou {props.name} !</h1>
+      <h1 className="title">Hello {props.name} !</h1>
       <p className="message">Est-ce que tu voudrais sortir un de ces quatre ?</p>
       <div className="buttons">
         <button className="button button-yes" onClick={props.onYes}>
-          Avec plaisir ! ♥
+          Oui
         </button>
         <button className="button button-outline" onClick={props.onNo}>
-          Une autre fois
+          Non 
         </button>
       </div>
     </div>
@@ -105,10 +105,10 @@ function App() {
   if (declined === true) {
     return (
       <Card>
-        <p className="message">Bon c’est pas grave, j’aurais tenté, tant pis</p>
+        <p className="message">Pas de soucis, je comprend</p>
         <div className="buttons">
           <button className="button button-outline" onClick={sayOops}>
-            J’ai changé d’avis
+            Retour 
           </button>
         </div>
       </Card>

@@ -82,7 +82,7 @@ body {
   position: absolute;
   z-index: 1;
   bottom: 10%;
-  height: 60vh;
+  height: 80vh;
   animation: float 4s ease-in-out infinite;
 }
 
