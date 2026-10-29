@@ -241,12 +241,7 @@ function App() {
 
   if (saved === true) {
     return (
-      <main className="card">
-        <p className="title">Noté ✓</p>
-        <p className="text">{dateText} à {time}</p>
-        <p className="text">La suite arrive bientôt...</p>
-        <button className="button-back" onClick={backToCalendar}>← Retour</button>
-      </main>
+    window.location.href = "activity.html?t=" + encodeURIComponent(token);
     );
   }
 
