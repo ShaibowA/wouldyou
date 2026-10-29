@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   function goToCalendar() {
-    window.location.href = "calendrier.html?t=" + encodeURIComponent(token);
+    window.location.href = "futatsu.html?t=" + encodeURIComponent(token);
   }
 
   function sayNo() {
@@ -66,7 +66,7 @@ function App() {
   if (status === "answered") {
     return (
       <Card>
-        <p className="message">Tu as déjà répondu 💌</p>
+        <p className="message">Tu as déjà répondu au formulaire, si jamais tu as une question tu peux directement m'écrire sur mon numéro</p>
       </Card>
     );
   }
@@ -74,7 +74,7 @@ function App() {
   if (declined === true) {
     return (
       <Card>
-        <p className="message">Ah... d’accord 😔</p>
+        <p className="message">Pas grave, je comprend</p>
         <div className="buttons">
           <button className="button button-outline" onClick={sayOops}>
             Oups, j’ai cliqué trop vite
@@ -87,7 +87,7 @@ function App() {
   return (
     <Card>
       <p className="message">
-        Coucou {name}, est-ce que ça te tenterait de sortir un de ces quatre ?
+        Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
       </p>
       <div className="buttons">
         <button className="button button-yes" onClick={goToCalendar}>
