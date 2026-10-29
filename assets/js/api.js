@@ -111,3 +111,5 @@ function getLink(token) {
   var pageUrl = window.location.href.split("admin.html")[0];
   return pageUrl + "?t=" + token;
 }
+
+// function getAnswer()
