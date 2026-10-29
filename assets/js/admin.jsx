@@ -149,7 +149,6 @@ function App() {
     return (
       <main className="page">
         <h1>Back office</h1>
-        <p>Connecte-toi avec ton compte Supabase.</p>
         <input type="email" placeholder="Email" value={email} onChange={changeEmail} />
         <input type="password" placeholder="Mot de passe" value={password} onChange={changePassword} />
         {loginError !== "" ? <p className="error">{loginError}</p> : null}

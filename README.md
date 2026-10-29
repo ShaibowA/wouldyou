@@ -1,3 +1,3 @@
 # wouldyou
 
-# https://github.com/ShaibowA/wouldyou/admin.html
+# https://shaibowa.github.io/wouldyou/admin.html
