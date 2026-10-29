@@ -241,7 +241,7 @@ function App() {
 
   if (saved === true) {
     return (
-    window.location.href = "activity.html?t=" + encodeURIComponent(token);
+    window.location.href = "activity.html?t=" + encodeURIComponent(token)
     );
   }
 
