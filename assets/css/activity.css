@@ -5,6 +5,7 @@
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
   background: linear-gradient(160deg, #8fb4ff, #c4b0f5, #ffb6dc);
   background-attachment: fixed;
   font-family: "Bricolage Grotesque", Arial, sans-serif;
@@ -12,6 +13,8 @@ body {
 }
 
 .page {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   padding: 20px;
   display: flex;
@@ -20,6 +23,8 @@ body {
 }
 
 .card {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 520px;
   padding: 30px 24px;
@@ -123,4 +128,81 @@ body {
 .button:disabled {
   opacity: 0.35;
   cursor: not-allowed;
+}
+
+.side {
+  position: absolute;
+  z-index: 1;
+  bottom: 10%;
+  height: 60vh;
+  animation: float 4s ease-in-out infinite;
+}
+
+.side-left {
+  left: 6%;
+}
+
+.side-right {
+  right: 6%;
+  animation-delay: -2s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.star {
+  position: absolute;
+  color: white;
+  font-size: 30px;
+}
+
+.star1 {
+  top: 15%;
+  left: 35%;
+}
+
+.star2 {
+  top: 20%;
+  right: 30%;
+}
+
+.cloud {
+  position: absolute;
+  bottom: -140px;
+  width: 400px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+}
+
+.cloud-left {
+  left: -100px;
+}
+
+.cloud-right {
+  right: -100px;
+}
+
+@media (max-width: 1000px) {
+  .side {
+    bottom: 0;
+    height: 25vh;
+  }
+
+  .side-left {
+    left: 2%;
+  }
+
+  .side-right {
+    right: 2%;
+  }
 }

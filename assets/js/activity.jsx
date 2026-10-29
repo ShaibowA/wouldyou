@@ -21,6 +21,23 @@ function contains(list, value) {
   return false;
 }
 
+function Scene(props) {
+  return (
+    <div className="page">
+      <div className="cloud cloud-left"></div>
+      <div className="cloud cloud-right"></div>
+
+      <span className="star star1">✦</span>
+      <span className="star star2">✧</span>
+
+      <img className="side side-left" src="assets/img/activites/perso_gauche.png" alt="" />
+      <img className="side side-right" src="assets/img/activites/perso_droite.png" alt="" />
+
+      <main className="card">{props.children}</main>
+    </div>
+  );
+}
+
 function Choice(props) {
   var className = "choice";
   if (props.selected === true) {
@@ -115,31 +132,25 @@ function App() {
 
   if (status === "loading") {
     return (
-      <div className="page">
-        <main className="card">
-          <p className="title">...</p>
-        </main>
-      </div>
+      <Scene>
+        <p className="title">...</p>
+      </Scene>
     );
   }
 
   if (status === "invalid") {
     return (
-      <div className="page">
-        <main className="card">
-          <p className="title">Ce lien ne marche pas.</p>
-        </main>
-      </div>
+      <Scene>
+        <p className="title">Ce lien ne marche pas.</p>
+      </Scene>
     );
   }
 
   if (status === "answered") {
     return (
-      <div className="page">
-        <main className="card">
-          <p className="title">Tu as déjà répondu 💌</p>
-        </main>
-      </div>
+      <Scene>
+        <p className="title">Tu as déjà répondu 💌</p>
+      </Scene>
     );
   }
 
@@ -163,36 +174,34 @@ function App() {
   });
 
   return (
-    <div className="page">
-      <main className="card">
-        <div className="back-line">
-          <button className="button-back" onClick={goBack}>← Retour</button>
+    <Scene>
+      <div className="back-line">
+        <button className="button-back" onClick={goBack}>← Retour</button>
+      </div>
+
+      <h1 className="title">Tu aimerais faire quoi ?</h1>
+      <p className="text">Tu peux en choisir plusieurs</p>
+
+      <div className="choices">{boxes}</div>
+
+      {otherSelected ? (
+        <div className="other">
+          <p className="label">Propose-moi autre chose</p>
+          <textarea
+            className="field"
+            rows="3"
+            maxLength="500"
+            placeholder="Décris-moi ton idée..."
+            value={message}
+            onChange={changeMessage}
+          ></textarea>
         </div>
+      ) : null}
 
-        <h1 className="title">Tu aimerais faire quoi ?</h1>
-        <p className="text">Tu peux en choisir plusieurs</p>
-
-        <div className="choices">{boxes}</div>
-
-        {otherSelected ? (
-          <div className="other">
-            <p className="label">Propose-moi autre chose</p>
-            <textarea
-              className="field"
-              rows="3"
-              maxLength="500"
-              placeholder="Décris-moi ton idée..."
-              value={message}
-              onChange={changeMessage}
-            ></textarea>
-          </div>
-        ) : null}
-
-        <button className="button" disabled={!canGoNext} onClick={goNext}>
-          Suivant
-        </button>
-      </main>
-    </div>
+      <button className="button" disabled={!canGoNext} onClick={goNext}>
+        Suivant
+      </button>
+    </Scene>
   );
 }
 

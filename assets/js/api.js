@@ -112,4 +112,3 @@ function getLink(token) {
   return pageUrl + "?t=" + token;
 }
 
-// function getAnswer()
