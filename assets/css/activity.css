@@ -206,3 +206,34 @@ body {
     right: 2%;
   }
 }
+
+.frame {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  height: 100vh;
+  width: auto;
+  pointer-events: none;
+}
+
+.frame-left {
+  left: 0;
+  clip-path: inset(0 40% 0 0);
+}
+
+.frame-right {
+  right: 0;
+  clip-path: inset(0 0 0 60%);
+}
+
+@media (max-width: 800px) {
+  .frame {
+    width: 100vw;
+    object-fit: cover;
+    clip-path: none;
+  }
+
+  .frame-right {
+    display: none;
+  }
+}
