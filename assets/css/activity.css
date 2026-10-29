@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #8fb4ff, #c4b0f5, #ffb6dc);
+  background-attachment: fixed;
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  color: #1d2147;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  padding: 30px 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  text-align: center;
+}
+
+.back-line {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.button-back {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(122, 99, 201, 0.15);
+  color: #1d2147;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.title {
+  margin: 0 0 8px 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.text {
+  margin: 0 0 18px 0;
+  color: #7a63c9;
+  font-weight: 600;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.choice {
+  padding: 18px 10px;
+  background: white;
+  border: 2px solid rgba(122, 99, 201, 0.25);
+  border-radius: 18px;
+  color: #1d2147;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.choice.selected {
+  background: #1d2147;
+  border-color: #1d2147;
+  color: white;
+}
+
+.emoji {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 30px;
+}
+
+.other {
+  margin-top: 18px;
+  text-align: left;
+}
+
+.label {
+  margin: 0 0 8px 0;
+  font-weight: 800;
+}
+
+.field {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid rgba(122, 99, 201, 0.3);
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #1d2147;
+}
+
+.button {
+  margin-top: 22px;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 999px;
+  background: #1d2147;
+  color: white;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
