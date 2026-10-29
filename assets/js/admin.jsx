@@ -163,12 +163,11 @@ function App() {
   if (logged === false) {
     return (
       <main className="page">
-        <h1>Back office</h1>
-        <p>Connecte-toi avec ton compte Supabase.</p>
+        <h1>Admin</h1>
         <input type="email" placeholder="Email" value={email} onChange={changeEmail} />
         <input type="password" placeholder="Mot de passe" value={password} onChange={changePassword} />
         {loginError !== "" ? <p className="error">{loginError}</p> : null}
-        <button className="button" onClick={handleLogin}>Se connecter</button>
+        <button className="button" onClick={handleLogin}>Login</button>
       </main>
     );
   }
