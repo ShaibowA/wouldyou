@@ -74,7 +74,7 @@ function App() {
   if (declined === true) {
     return (
       <Card>
-        <p className="message">Pas grave, je comprend</p>
+        <p className="message">Bon c'est pas grave, j'aurais tenté, tant pis </p>
         <div className="buttons">
           <button className="button button-outline" onClick={sayOops}>
             Oups, j’ai cliqué trop vite
