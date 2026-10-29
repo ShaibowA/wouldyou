@@ -86,7 +86,7 @@ function App() {
 
   return (
     <Card>
-      <img className="ronflex" src="assets/img/ronflex"/>
+      <img className="ronflex" src="assets/img/ronflex.jpg"/>
       <p className="message">
         Coucou {name}, est-ce que tu voudrais sortir un de ces quatres ? 
       </p>
