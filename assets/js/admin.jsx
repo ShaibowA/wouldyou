@@ -118,16 +118,7 @@ function App() {
     setNewName("");
     loadList();
   }
-
-  async function copyText(text) {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("Lien copié !");
-    } catch (error) {
-      prompt("Copie ce lien :", text);
-    }
-  }
-
+  
   function copyFreshLink() {
     copyText(freshLink);
   }
@@ -148,11 +139,11 @@ function App() {
   if (logged === false) {
     return (
       <main className="page">
-        <h1>Back office</h1>
+        <h1>Data</h1>
         <input type="email" placeholder="Email" value={email} onChange={changeEmail} />
         <input type="password" placeholder="Mot de passe" value={password} onChange={changePassword} />
         {loginError !== "" ? <p className="error">{loginError}</p> : null}
-        <button className="button" onClick={handleLogin}>Se connecter</button>
+        <button className="button" onClick={handleLogin}>log in</button>
       </main>
     );
   }
