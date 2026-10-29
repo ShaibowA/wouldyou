@@ -3,6 +3,9 @@ var useEffect = React.useEffect;
 
 var token = new URLSearchParams(window.location.search).get("t");
 
+var PREVIOUS_PAGE = "calend.html";
+var NEXT_PAGE = "lieu.html";
+
 var CHOICES = [
   { emoji: "✨", label: "Catégorie 1" },
   { emoji: "✨", label: "Catégorie 2" },
@@ -30,8 +33,8 @@ function Scene(props) {
       <span className="star star1">✦</span>
       <span className="star star2">✧</span>
 
-      <img className="side side-left" src="assets/img/activites/perso_gauche.png" alt="" />
-      <img className="side side-right" src="assets/img/activites/perso_droite.png" alt="" />
+      <img className="side side-left" src="assets/img/activity/perso_gauche.png" alt="" />
+      <img className="side side-right" src="assets/img/activity/perso_droite.png" alt="" />
 
       <main className="card">{props.children}</main>
     </div>
@@ -80,7 +83,7 @@ function App() {
         } else if (invitation.answered === true) {
           setStatus("answered");
         } else if (sessionStorage.getItem("rdv") === null) {
-          window.location.href = "calend.html?t=" + encodeURIComponent(token);
+          window.location.href = PREVIOUS_PAGE + "?t=" + encodeURIComponent(token);
         } else {
           setStatus("ok");
         }
@@ -122,12 +125,12 @@ function App() {
 
   function goBack() {
     saveChoice();
-    window.location.href = "calend.html?t=" + encodeURIComponent(token);
+    window.location.href = PREVIOUS_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   function goNext() {
     saveChoice();
-    window.location.href = "lieu.html?t=" + encodeURIComponent(token);
+    window.location.href = NEXT_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   if (status === "loading") {
