@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px 14px;
+  background: linear-gradient(135deg, #8fb4ff, #ffb6dc);
+  background-attachment: fixed;
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  color: #1d2147;
+}
+
+.page {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 28px 22px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(29, 33, 71, 0.2);
+}
+
+.top {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 0 0 16px 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+p {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  background: white;
+  border: 2px solid rgba(29, 33, 71, 0.2);
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: #1d2147;
+}
+
+.button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  background: #1d2147;
+  color: white;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button-small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.button-light {
+  background: rgba(29, 33, 71, 0.12);
+  color: #1d2147;
+}
+
+.button-full {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.error {
+  color: #d6246e;
+  font-weight: 600;
+}
+
+.card {
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  background: white;
+  border: 2px solid rgba(29, 33, 71, 0.14);
+  border-radius: 18px;
+}
+
+.card h3 {
+  margin: 0 0 6px 0;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.new-link {
+  border-color: #1d2147;
+}
+
+.link {
+  margin: 8px 0;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.details {
+  white-space: pre-line;
+}
+
+.card-buttons {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}

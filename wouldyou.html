@@ -2,79 +2,20 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Une petite question…</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<title>Une petite question</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
-<main>
+<div id="root"></div>
 
-<section id="ask" class="on">
-  <p class="hi" id="greet">Coucou,</p>
-  <h1>Tu dirais oui à un date avec moi ?</h1>
-  <p>Une seule question. Réponds avec ton cœur.</p>
-  <div class="row">
-    <button class="btn yes" id="yes">Oui 💛</button>
-    <button class="btn no" id="no">Non</button>
-  </div>
-</section>
-
-<section id="nope">
-  <div class="big">😔</div>
-  <h2>Ah… d’accord.</h2>
-  <p>Pas de souci, merci d’avoir été honnête. Je survivrai (je crois).</p>
-  <button class="btn ghost" id="oops">Oups, j’ai cliqué trop vite</button>
-</section>
-
-<section id="s1">
-  <div class="dots"><i class="d"></i><i></i><i></i></div>
-  <h2>Yes ! Alors, quand es-tu dispo ?</h2>
-  <input type="date" id="date" aria-label="Choisis un jour">
-  <div class="chips" id="slots">
-    <button class="chip" aria-pressed="false">Matin</button>
-    <button class="chip" aria-pressed="false">Après-midi</button>
-    <button class="chip" aria-pressed="false">Soirée</button>
-  </div>
-  <button class="btn next" id="n1" disabled>Suite</button>
-</section>
-
-<section id="s2">
-  <div class="dots"><i class="d"></i><i class="d"></i><i></i></div>
-  <h2>Et ce jour-là, tu voudrais faire quoi ?</h2>
-  <div class="chips" id="acts">
-    <button class="chip" aria-pressed="false">Un restau 🍝</button>
-    <button class="chip" aria-pressed="false">Un ciné 🍿</button>
-    <button class="chip" aria-pressed="false">Une balade 🌳</button>
-    <button class="chip" aria-pressed="false">Un verre 🍹</button>
-    <button class="chip" aria-pressed="false">Bowling 🎳</button>
-    <button class="chip" aria-pressed="false">Surprise-moi 🎁</button>
-  </div>
-  <button class="btn next" id="n2" disabled>Suite</button>
-</section>
-
-<section id="s3">
-  <div class="dots"><i class="d"></i><i class="d"></i><i class="d"></i></div>
-  <h2>Un dernier truc : une envie, une condition, un message ?</h2>
-  <textarea id="extra" placeholder="Ex : j’adore les pâtes, je déteste les films d’horreur…"></textarea>
-  <button class="btn next" id="n3">Voir le résumé</button>
-</section>
-
-<section id="done">
-  <div class="big" id="doneIcon">💌</div>
-  <h2 id="doneTitle">On récapitule</h2>
-  <div class="recap" id="recap"></div>
-  <p id="status">Quand tu cliques, ta réponse lui est envoyée.</p>
-  <div class="row">
-    <button class="btn yes" id="send">Envoyer ma réponse</button>
-    <button class="btn" id="copy" hidden>Copier</button>
-  </div>
-</section>
-
-</main>
-<script src="config.js"></script>
-<script src="app.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.25.6/babel.min.js"></script>
+<script type="text/babel" src="assets/js/index.jsx"></script>
 </body>
 </html>
