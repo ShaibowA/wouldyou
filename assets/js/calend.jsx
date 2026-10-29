@@ -167,7 +167,7 @@ function Scene(props) {
       <img className="side side-left" src="assets/img/calend/vegeta.jpg" alt="" />
       <img className="side side-right" src="assets/img/calend/goku_montain.jpg" alt="" />
 
-      <Scene>{props.children}</Scene>
+      <main className="card">{props.children}</main>
     </div>
   );
 }
@@ -176,7 +176,6 @@ function App() {
   var [status, setStatus] = useState("loading");
   var [date, setDate] = useState("");
   var [time, setTime] = useState("");
-  var [saved, setSaved] = useState(false);
 
   useEffect(function () {
     async function checkLink() {
@@ -213,14 +212,10 @@ function App() {
     window.location.href = "index.html?t=" + encodeURIComponent(token);
   }
 
-  function backToCalendar() {
-    setSaved(false);
-  }
-
   function validateSlot() {
     var choice = { date: date, time: time };
     sessionStorage.setItem("rdv", JSON.stringify(choice));
-    setSaved(true);
+    window.location.href = "activity.html?t=" + encodeURIComponent(token);
   }
 
   if (status === "loading") {
@@ -254,12 +249,6 @@ function App() {
       day: "numeric",
       month: "long"
     });
-  }
-
-  if (saved === true) {
-    return (
-    window.location.href = "activity.html?t=" + encodeURIComponent(token)
-    );
   }
 
   var summary = "Choisis un jour puis une heure";
