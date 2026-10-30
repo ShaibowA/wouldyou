@@ -8,8 +8,8 @@ var ACTIVITY_PAGE = "activity.html";
 var PLACE_PAGE = "place.html";
 var FINAL_PAGE = "final.html";
 
-var LEFT_IMAGE = "assets/img/recap/perso_gauche.png";
-var RIGHT_IMAGE = "assets/img/recap/perso_droite.png";
+var LEFT_IMAGE = "assets/img/recap/rengoku.png";
+var RIGHT_IMAGE = "assets/img/recap/charizard_x.png";
 var PERCH_IMAGE = "assets/img/recap/perso_cadre.png";
 
 function Scene(props) {
