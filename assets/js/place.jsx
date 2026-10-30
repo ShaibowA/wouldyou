@@ -5,6 +5,7 @@ var token = new URLSearchParams(window.location.search).get("t");
 
 var CALENDAR_PAGE = "calend.html";
 var ACTIVITY_PAGE = "activity.html";
+var NEXT_PAGE = "recap.html";
 
 var LEFT_IMAGE = "assets/img/place/perso_gauche.png";
 var RIGHT_IMAGE = "assets/img/place/perso_droite.png";
@@ -43,8 +44,6 @@ function App() {
   var [status, setStatus] = useState("loading");
   var [place, setPlace] = useState(start.place);
   var [message, setMessage] = useState(start.message);
-  var [sending, setSending] = useState(false);
-  var [error, setError] = useState("");
 
   useEffect(function () {
     async function checkLink() {
@@ -65,7 +64,7 @@ function App() {
         } else {
           setStatus("ok");
         }
-      } catch (err) {
+      } catch (error) {
         setStatus("invalid");
       }
     }
@@ -80,43 +79,19 @@ function App() {
     setMessage(event.target.value);
   }
 
-  function goBack() {
-    var choice = { place: place, message: message };
+  function saveChoice() {
+    var choice = { place: place.trim(), message: message.trim() };
     sessionStorage.setItem("place", JSON.stringify(choice));
+  }
+
+  function goBack() {
+    saveChoice();
     window.location.href = ACTIVITY_PAGE + "?t=" + encodeURIComponent(token);
   }
 
-  async function sendAnswer() {
-    setSending(true);
-    setError("");
-
-    var rdv = JSON.parse(sessionStorage.getItem("rdv"));
-    var activities = JSON.parse(sessionStorage.getItem("activities"));
-
-    var answer = {
-      date: rdv.date,
-      time: rdv.time,
-      activities: activities.list.join(", "),
-      activityMessage: activities.message,
-      pickup: "meet",
-      place: place.trim(),
-      message: message.trim()
-    };
-
-    try {
-      var ok = await submitAnswer(token, answer);
-      sessionStorage.removeItem("rdv");
-      sessionStorage.removeItem("activities");
-      sessionStorage.removeItem("place");
-      if (ok === true) {
-        setStatus("sent");
-      } else {
-        setStatus("answered");
-      }
-    } catch (err) {
-      setError("L’envoi a raté, réessaie dans un instant.");
-      setSending(false);
-    }
+  function goNext() {
+    saveChoice();
+    window.location.href = NEXT_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   if (status === "loading") {
@@ -138,26 +113,12 @@ function App() {
   if (status === "answered") {
     return (
       <Scene>
-        <p className="title">Tu as déjà répondu 💌</p>
+        <p className="title">Tu as déjà répondu </p>
       </Scene>
     );
   }
 
-  if (status === "sent") {
-    return (
-      <Scene>
-        <p className="title">C’est envoyé ! 🎉</p>
-        <p className="text">Merci, je te réponds très vite 💛</p>
-      </Scene>
-    );
-  }
-
-  var canSend = place.trim() !== "" && sending === false;
-
-  var buttonText = "Envoyer ma réponse";
-  if (sending === true) {
-    buttonText = "Envoi...";
-  }
+  var canGoNext = place.trim() !== "";
 
   return (
     <Scene>
@@ -165,7 +126,7 @@ function App() {
         <button className="button-back" onClick={goBack}>← Retour</button>
       </div>
 
-      <p className="badge">📍 Dernière étape</p>
+      <p className="badge">📍 Presque fini</p>
       <h1 className="title">Où veux-tu qu’on se retrouve ?</h1>
 
       <p className="text">Une adresse, un lieu... comme tu préfères</p>
@@ -174,27 +135,12 @@ function App() {
         className="field place-field"
         type="text"
         maxLength="300"
-        placeholder="Ex : devant le cinéma"
         value={place}
         onChange={changePlace}
       />
 
-      <div className="last">
-        <p className="label">Un petit mot pour la fin ? (facultatif)</p>
-        <input
-          className="field"
-          type="text"
-          maxLength="500"
-          placeholder="Écris ce que tu veux"
-          value={message}
-          onChange={changeMessage}
-        />
-      </div>
-
-      {error !== "" ? <p className="error">{error}</p> : null}
-
-      <button className="button" disabled={!canSend} onClick={sendAnswer}>
-        {buttonText}
+      <button className="button" disabled={!canGoNext} onClick={goNext}>
+        Suivant
       </button>
     </Scene>
   );
