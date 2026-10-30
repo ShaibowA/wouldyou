@@ -6,6 +6,10 @@ var token = new URLSearchParams(window.location.search).get("t");
 var CALENDAR_PAGE = "calend.html";
 var ACTIVITY_PAGE = "activity.html";
 
+var LEFT_IMAGE = "assets/img/place/perso_gauche.png";
+var RIGHT_IMAGE = "assets/img/place/perso_droite.png";
+var PERCH_IMAGE = "assets/img/place/gojo.png";
+
 function Scene(props) {
   return (
     <div className="page">
@@ -15,11 +19,11 @@ function Scene(props) {
       <span className="star star1">✦</span>
       <span className="star star2">✧</span>
 
-      <img className="side side-left" src="assets/img/place/perso_gauche.png" alt="" />
-      <img className="side side-right" src="assets/img/place/perso_droite.png" alt="" />
+      <img className="side side-left" src={LEFT_IMAGE} alt="" />
+      <img className="side side-right" src={RIGHT_IMAGE} alt="" />
 
       <main className="card">
-        <img className="perch" src="assets/img/place/gojo.png" alt="" />
+        <img className="perch" src={PERCH_IMAGE} alt="" />
         {props.children}
       </main>
     </div>

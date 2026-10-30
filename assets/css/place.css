@@ -251,7 +251,9 @@ input {
   bottom: 83%;
   left: 2.4%;
   width: auto;
+  pointer-events: none;
 }
+
 
 .badge {
   display: inline-block;
