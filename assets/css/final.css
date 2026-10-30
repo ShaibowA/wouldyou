@@ -72,10 +72,12 @@ body {
 
 .side-left {
   left: 6%;
+  height: 70vh;
 }
 
 .side-right {
   right: 6%;
+  margin-bottom: 50px;
   animation-delay: -2s;
 }
 
