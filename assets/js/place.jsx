@@ -135,6 +135,7 @@ function App() {
         className="field place-field"
         type="text"
         maxLength="300"
+        placeholder="Sinon tu me laisses choisir"
         value={place}
         onChange={changePlace}
       />

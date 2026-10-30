@@ -249,7 +249,7 @@ body {
   height: 60vh;
   clip-path: inset(0 0 0 0);
   margin-right: -2rem;
-  margin-top: 8rem;
+  margin-top: 10rem;
 }
 
 @media (max-width: 800px) {
