@@ -209,11 +209,10 @@ body {
 
 .frame {
   position: absolute;
-  top: 0;
   z-index: 1;
-  height: 80vh;
-  width: auto;
-  pointer-events: none;
+  bottom: 10%;
+  height: 100vh;
+  animation: float 4s ease-in-out infinite;
 }
 
 .frame-left {
