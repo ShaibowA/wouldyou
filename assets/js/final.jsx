@@ -73,7 +73,7 @@ function App() {
   return (
     <Scene>
       <h1 className="title">Réponse envoyée ✓</h1>
-      <p className="text">Tu peux fermer cette page, merci beaucoup</p>
+      <p className="text">Merci beaucoup 🐥</p>
     </Scene>
   );
 }
