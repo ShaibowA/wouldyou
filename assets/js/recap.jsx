@@ -5,10 +5,11 @@ var token = new URLSearchParams(window.location.search).get("t");
 
 var CALENDAR_PAGE = "calend.html";
 var ACTIVITY_PAGE = "activity.html";
+var PLACE_PAGE = "place.html";
 
-var LEFT_IMAGE = "assets/img/place/perso_gauche.png";
-var RIGHT_IMAGE = "assets/img/place/perso_droite.png";
-var PERCH_IMAGE = "assets/img/place/perso_cadre.png";
+var LEFT_IMAGE = "assets/img/recap/perso_gauche.png";
+var RIGHT_IMAGE = "assets/img/recap/perso_droite.png";
+var PERCH_IMAGE = "assets/img/recap/perso_cadre.png";
 
 function Scene(props) {
   return (
@@ -30,19 +31,24 @@ function Scene(props) {
   );
 }
 
-function App() {
-  var oldChoice = sessionStorage.getItem("place");
-  var start = { place: "", message: "" };
-  if (oldChoice !== null) {
-    var saved = JSON.parse(oldChoice);
-    if (saved.place !== undefined) {
-      start = saved;
-    }
+function Row(props) {
+  function edit() {
+    window.location.href = props.page + "?t=" + encodeURIComponent(token);
   }
 
+  return (
+    <div className="row">
+      <div className="row-text">
+        <p className="row-label">{props.emoji} {props.label}</p>
+        <p className="row-value">{props.value}</p>
+      </div>
+      <button className="row-edit" onClick={edit}>Modifier</button>
+    </div>
+  );
+}
+
+function App() {
   var [status, setStatus] = useState("loading");
-  var [place, setPlace] = useState(start.place);
-  var [message, setMessage] = useState(start.message);
   var [sending, setSending] = useState(false);
   var [error, setError] = useState("");
 
@@ -62,6 +68,8 @@ function App() {
           window.location.href = CALENDAR_PAGE + "?t=" + encodeURIComponent(token);
         } else if (sessionStorage.getItem("activities") === null) {
           window.location.href = ACTIVITY_PAGE + "?t=" + encodeURIComponent(token);
+        } else if (sessionStorage.getItem("place") === null) {
+          window.location.href = PLACE_PAGE + "?t=" + encodeURIComponent(token);
         } else {
           setStatus("ok");
         }
@@ -72,18 +80,8 @@ function App() {
     checkLink();
   }, []);
 
-  function changePlace(event) {
-    setPlace(event.target.value);
-  }
-
-  function changeMessage(event) {
-    setMessage(event.target.value);
-  }
-
   function goBack() {
-    var choice = { place: place, message: message };
-    sessionStorage.setItem("place", JSON.stringify(choice));
-    window.location.href = ACTIVITY_PAGE + "?t=" + encodeURIComponent(token);
+    window.location.href = PLACE_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   async function sendAnswer() {
@@ -92,6 +90,7 @@ function App() {
 
     var rdv = JSON.parse(sessionStorage.getItem("rdv"));
     var activities = JSON.parse(sessionStorage.getItem("activities"));
+    var place = JSON.parse(sessionStorage.getItem("place"));
 
     var answer = {
       date: rdv.date,
@@ -99,8 +98,8 @@ function App() {
       activities: activities.list.join(", "),
       activityMessage: activities.message,
       pickup: "meet",
-      place: place.trim(),
-      message: message.trim()
+      place: place.place,
+      message: place.message
     };
 
     try {
@@ -152,7 +151,20 @@ function App() {
     );
   }
 
-  var canSend = place.trim() !== "" && sending === false;
+  var rdv = JSON.parse(sessionStorage.getItem("rdv"));
+  var activities = JSON.parse(sessionStorage.getItem("activities"));
+  var place = JSON.parse(sessionStorage.getItem("place"));
+
+  var dateText = new Date(rdv.date + "T12:00").toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  });
+
+  var activitiesText = activities.list.join(", ");
+  if (activities.message !== "") {
+    activitiesText = activitiesText + " (" + activities.message + ")";
+  }
 
   var buttonText = "Envoyer ma réponse";
   if (sending === true) {
@@ -165,35 +177,21 @@ function App() {
         <button className="button-back" onClick={goBack}>← Retour</button>
       </div>
 
-      <p className="badge">📍 Dernière étape</p>
-      <h1 className="title">Où veux-tu qu’on se retrouve ?</h1>
+      <p className="badge">✨ Dernière étape</p>
+      <h1 className="title">Ton récap</h1>
 
-      <p className="text">Une adresse, un lieu... comme tu préfères</p>
+      <Row emoji="📅" label="Quand" value={dateText + " à " + rdv.time} page={CALENDAR_PAGE} />
+      <Row emoji="🎯" label="Quoi" value={activitiesText} page={ACTIVITY_PAGE} />
+      <Row emoji="📍" label="Où" value={place.place} page={PLACE_PAGE} />
+      {place.message !== "" ? (
+        <Row emoji="💬" label="Ton petit mot" value={place.message} page={PLACE_PAGE} />
+      ) : null}
 
-      <input
-        className="field place-field"
-        type="text"
-        maxLength="300"
-        placeholder="Ex : devant le cinéma"
-        value={place}
-        onChange={changePlace}
-      />
-
-      <div className="last">
-        <p className="label">Un petit mot pour la fin ? (facultatif)</p>
-        <input
-          className="field"
-          type="text"
-          maxLength="500"
-          placeholder="Écris ce que tu veux"
-          value={message}
-          onChange={changeMessage}
-        />
-      </div>
+      <p className="text">Tout est bon ? Je reçois ta réponse dès que tu envoies.</p>
 
       {error !== "" ? <p className="error">{error}</p> : null}
 
-      <button className="button" disabled={!canSend} onClick={sendAnswer}>
+      <button className="button" disabled={sending} onClick={sendAnswer}>
         {buttonText}
       </button>
     </Scene>

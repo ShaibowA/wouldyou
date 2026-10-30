@@ -1,0 +1,308 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(160deg, #8fb4ff, #c4b0f5, #ffb6dc);
+  background-attachment: fixed;
+  font-family: "Bricolage Grotesque", Arial, sans-serif;
+  color: #1d2147;
+}
+
+button,
+input {
+  font-family: inherit;
+  color: #1d2147;
+}
+
+.page {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 520px;
+  padding: 30px 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 28px;
+  text-align: center;
+}
+
+.back-line {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.button-back {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(122, 99, 201, 0.15);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.title {
+  margin: 0 0 18px 0;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.text {
+  margin: 16px 0 0 0;
+  color: #7a63c9;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.option {
+  padding: 20px 10px;
+  background: white;
+  border: 2px solid rgba(122, 99, 201, 0.25);
+  border-radius: 18px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: rgba(255, 182, 220, 0.3);
+}
+
+.option.selected {
+  background: #1d2147;
+  border-color: #1d2147;
+  color: white;
+}
+
+.emoji {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 30px;
+}
+
+.reveal {
+  min-height: 110px;
+  margin-top: 18px;
+  text-align: left;
+}
+
+.hint {
+  margin: 20px 0 0 0;
+  color: #7a63c9;
+  text-align: center;
+  font-weight: 600;
+}
+
+.last {
+  margin-top: 8px;
+  text-align: left;
+}
+
+.label {
+  margin: 0 0 8px 0;
+  font-weight: 800;
+}
+
+.field {
+  width: 100%;
+  padding: 14px 16px;
+  background: white;
+  border: 2px solid rgba(122, 99, 201, 0.3);
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+.error {
+  margin: 14px 0 0 0;
+  color: #d6246e;
+  font-weight: 600;
+}
+
+.button {
+  margin-top: 22px;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 999px;
+  background: #1d2147;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.side {
+  position: fixed;
+  z-index: 1;
+  bottom: 10%;
+  height: 60vh;
+  animation: float 4s ease-in-out infinite;
+}
+
+.side-left {
+  left: 6%;
+}
+
+.side-right {
+  right: 6%;
+  animation-delay: -2s;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.star {
+  position: fixed;
+  color: white;
+  font-size: 30px;
+}
+
+.star1 {
+  top: 15%;
+  left: 35%;
+}
+
+.star2 {
+  top: 20%;
+  right: 30%;
+}
+
+.cloud {
+  position: fixed;
+  bottom: -140px;
+  width: 400px;
+  height: 250px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+}
+
+.cloud-left {
+  left: -100px;
+}
+
+.cloud-right {
+  right: -100px;
+}
+
+@media (max-width: 1000px) {
+  .side {
+    bottom: 0;
+    height: 25vh;
+  }
+
+  .side-left {
+    left: 2%;
+  }
+
+  .side-right {
+    right: 2%;
+  }
+}
+
+@media (max-width: 420px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+.place-field {
+  margin-top: 16px;
+  margin-bottom: 18px;
+}
+
+.card {
+  margin-top: 120px;
+}
+
+.perch {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 120px;
+  margin-left: -60px;
+  margin-bottom: -6px;
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0 12px 0;
+  padding: 6px 18px;
+  background: rgba(122, 99, 201, 0.15);
+  border-radius: 999px;
+  color: #7a63c9;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.perch {
+  pointer-events: none;
+}
+
+.row {
+  margin-bottom: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: white;
+  border: 2px solid rgba(122, 99, 201, 0.25);
+  border-radius: 16px;
+  text-align: left;
+}
+
+.row-label {
+  margin: 0 0 2px 0;
+  color: #7a63c9;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.row-value {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  word-break: break-word;
+}
+
+.row-edit {
+  padding: 6px 12px;
+  background: rgba(122, 99, 201, 0.15);
+  border: none;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
