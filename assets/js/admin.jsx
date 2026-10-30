@@ -18,14 +18,23 @@ function Invitation(props) {
       month: "long"
     });
     details = "Jour : " + dateText;
-    if (item.slot !== null) {
-      details = details + " (" + item.slot + ")";
+    if (item.time !== null) {
+      details = details + " à " + item.time;
     }
-    if (item.activity !== null) {
-      details = details + "\nIdée : " + item.activity;
+    if (item.activity !== null && item.activity !== "") {
+      details = details + "\nActivités : " + item.activity;
     }
-    if (item.extra !== null && item.extra !== "") {
-      details = details + "\nMessage : " + item.extra;
+    if (item.activity_message !== null && item.activity_message !== "") {
+      details = details + "\nAutre idée : " + item.activity_message;
+    }
+    if (item.pickup === "pickup") {
+      details = details + "\nTu vas la chercher : " + item.place;
+    }
+    if (item.pickup === "meet") {
+      details = details + "\nOn se retrouve : " + item.place;
+    }
+    if (item.message !== null && item.message !== "") {
+      details = details + "\nMessage : " + item.message;
     }
   }
 
