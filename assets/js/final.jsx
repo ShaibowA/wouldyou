@@ -7,6 +7,7 @@ var INDEX_PAGE = "index.html";
 
 var LEFT_IMAGE = "assets/img/final/megumin.png";
 var RIGHT_IMAGE = "assets/img/final/ichigo.png";
+var PERCH_IMAGE = "assets/img/final/perso_cadre.png";
 
 function Scene(props) {
   return (
@@ -20,6 +21,10 @@ function Scene(props) {
       <img className="side side-left" src={LEFT_IMAGE} alt="" />
       <img className="side side-right" src={RIGHT_IMAGE} alt="" />
 
+      <main className="card">
+        <img className="perch" src={PERCH_IMAGE} alt="" />
+        {props.children}
+      </main>
     </div>
   );
 }
