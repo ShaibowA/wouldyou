@@ -6,6 +6,7 @@ var token = new URLSearchParams(window.location.search).get("t");
 var CALENDAR_PAGE = "calend.html";
 var ACTIVITY_PAGE = "activity.html";
 var PLACE_PAGE = "place.html";
+var NEXT_PAGE = "final.html";
 
 var LEFT_IMAGE = "assets/img/recap/perso_gauche.png";
 var RIGHT_IMAGE = "assets/img/recap/perso_droite.png";
@@ -82,6 +83,11 @@ function App() {
 
   function goBack() {
     window.location.href = PLACE_PAGE + "?t=" + encodeURIComponent(token);
+  }
+
+    function goNext() {
+    saveChoice();
+    window.location.href = NEXT_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   async function sendAnswer() {
@@ -184,9 +190,6 @@ function App() {
       <Row emoji="📅" label="Quand" value={dateText + " à " + rdv.time} page={CALENDAR_PAGE} />
       <Row emoji="🎯" label="Quoi" value={activitiesText} page={ACTIVITY_PAGE} />
       <Row emoji="📍" label="Où" value={place.place} page={PLACE_PAGE} />
-      {place.message !== "" ? (
-        <Row emoji="💬" label="Si tu veux ajouter quelque chose :" value={place.message} page={PLACE_PAGE} />
-      ) : null}
 
       <p className="text">Tout est bon ?</p>
 
