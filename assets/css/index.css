@@ -35,7 +35,7 @@ body {
 
 .mascot {
   display: block;
-  width: 100px;
+  width: auto;
   margin: 0 auto 10px auto;
 }
 
