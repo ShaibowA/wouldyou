@@ -6,11 +6,11 @@ var token = new URLSearchParams(window.location.search).get("t");
 var CALENDAR_PAGE = "calend.html";
 var ACTIVITY_PAGE = "activity.html";
 var PLACE_PAGE = "place.html";
-var FINAL_PAGE = "final.html";
+var NEXT_PAGE = "final.html";
 
-var LEFT_IMAGE = "assets/img/recap/perso_gauche.png";
-var RIGHT_IMAGE = "assets/img/recap/perso_droite.png";
-var PERCH_IMAGE = "assets/img/recap/perso_cadre.png";
+var LEFT_IMAGE = "assets/img/recap/rengoku.png";
+var RIGHT_IMAGE = "assets/img/recap/charizard_x.png";
+var PERCH_IMAGE = "assets/img/recap/gojo.png";
 
 function Scene(props) {
   return (
@@ -64,7 +64,7 @@ function App() {
         if (invitation === null) {
           setStatus("invalid");
         } else if (invitation.answered === true) {
-          window.location.href = FINAL_PAGE + "?t=" + encodeURIComponent(token);
+          setStatus("answered");
         } else if (sessionStorage.getItem("rdv") === null) {
           window.location.href = CALENDAR_PAGE + "?t=" + encodeURIComponent(token);
         } else if (sessionStorage.getItem("activities") === null) {
@@ -83,6 +83,11 @@ function App() {
 
   function goBack() {
     window.location.href = PLACE_PAGE + "?t=" + encodeURIComponent(token);
+  }
+
+    function goNext() {
+    saveChoice();
+    window.location.href = NEXT_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   async function sendAnswer() {
@@ -104,11 +109,15 @@ function App() {
     };
 
     try {
-      await submitAnswer(token, answer);
+      var ok = await submitAnswer(token, answer);
       sessionStorage.removeItem("rdv");
       sessionStorage.removeItem("activities");
       sessionStorage.removeItem("place");
-      window.location.href = FINAL_PAGE + "?t=" + encodeURIComponent(token);
+      if (ok === true) {
+        setStatus("sent");
+      } else {
+        setStatus("answered");
+      }
     } catch (err) {
       setError("L’envoi a raté, réessaie dans un instant.");
       setSending(false);
@@ -127,6 +136,24 @@ function App() {
     return (
       <Scene>
         <p className="title">Ce lien ne marche pas.</p>
+      </Scene>
+    );
+  }
+
+  if (status === "answered") {
+    return (
+      <Scene>
+        <p className="title">Réponse déjà envoyée ✓</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup </p>
+      </Scene>
+    );
+  }
+
+  if (status === "sent") {
+    return (
+      <Scene>
+        <p className="title">Réponse envoyée ✓</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup </p>
       </Scene>
     );
   }
@@ -163,11 +190,8 @@ function App() {
       <Row emoji="📅" label="Quand" value={dateText + " à " + rdv.time} page={CALENDAR_PAGE} />
       <Row emoji="🎯" label="Quoi" value={activitiesText} page={ACTIVITY_PAGE} />
       <Row emoji="📍" label="Où" value={place.place} page={PLACE_PAGE} />
-      {place.message !== "" ? (
-        <Row emoji="💬" label="Ton petit mot" value={place.message} page={PLACE_PAGE} />
-      ) : null}
 
-      <p className="text">Tout est bon ? Je reçois ta réponse dès que tu envoies.</p>
+      <p className="text">Tout est bon ?</p>
 
       {error !== "" ? <p className="error">{error}</p> : null}
 
