@@ -138,7 +138,7 @@ function App() {
     return (
       <Scene>
         <p className="title">Réponse déjà envoyée ✓</p>
-        <p className="text">Tu peux fermer cette page, merci beaucoup 💛</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup </p>
       </Scene>
     );
   }
@@ -147,7 +147,7 @@ function App() {
     return (
       <Scene>
         <p className="title">Réponse envoyée ✓</p>
-        <p className="text">Tu peux fermer cette page, merci beaucoup 💛</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup </p>
       </Scene>
     );
   }
@@ -185,10 +185,10 @@ function App() {
       <Row emoji="🎯" label="Quoi" value={activitiesText} page={ACTIVITY_PAGE} />
       <Row emoji="📍" label="Où" value={place.place} page={PLACE_PAGE} />
       {place.message !== "" ? (
-        <Row emoji="💬" label="Ton petit mot" value={place.message} page={PLACE_PAGE} />
+        <Row emoji="💬" label="Si tu veux ajouter quelque chose :" value={place.message} page={PLACE_PAGE} />
       ) : null}
 
-      <p className="text">Tout est bon ? Je reçois ta réponse dès que tu envoies.</p>
+      <p className="text">Tout est bon ?</p>
 
       {error !== "" ? <p className="error">{error}</p> : null}
 
