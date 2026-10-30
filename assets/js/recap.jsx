@@ -9,7 +9,7 @@ var PLACE_PAGE = "place.html";
 
 var LEFT_IMAGE = "assets/img/recap/perso_gauche.png";
 var RIGHT_IMAGE = "assets/img/recap/perso_droite.png";
-var PERCH_IMAGE = "assets/img/recap/perso_cadre.png";
+var PERCH_IMAGE = "assets/img/recap/gojo.png";
 
 function Scene(props) {
   return (
@@ -137,7 +137,8 @@ function App() {
   if (status === "answered") {
     return (
       <Scene>
-        <p className="title">Tu as déjà répondu 💌</p>
+        <p className="title">Réponse déjà envoyée ✓</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup 💛</p>
       </Scene>
     );
   }
@@ -145,8 +146,8 @@ function App() {
   if (status === "sent") {
     return (
       <Scene>
-        <p className="title">C’est envoyé ! 🎉</p>
-        <p className="text">Merci, je te réponds très vite 💛</p>
+        <p className="title">Réponse envoyée ✓</p>
+        <p className="text">Tu peux fermer cette page, merci beaucoup 💛</p>
       </Scene>
     );
   }
