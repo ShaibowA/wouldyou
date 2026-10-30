@@ -7,11 +7,11 @@ var PREVIOUS_PAGE = "calend.html";
 var NEXT_PAGE = "place.html";
 
 var CHOICES = [
-  { emoji: "✨", label: "Catégorie 1" },
-  { emoji: "✨", label: "Catégorie 2" },
-  { emoji: "✨", label: "Catégorie 3" },
-  { emoji: "✨", label: "Catégorie 4" },
-  { emoji: "✨", label: "Catégorie 5" },
+  { emoji: "✨", label: "Piscine" },
+  { emoji: "✨", label: "Patinoire" },
+  { emoji: "✨", label: "Musée" },
+  { emoji: "✨", label: "Arcade Games" },
+  { emoji: "✨", label: "Episode 1 de SNK" },
   { emoji: "✏️", label: "Autre" }
 ];
 
