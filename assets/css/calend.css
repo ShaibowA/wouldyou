@@ -219,7 +219,7 @@ button {
   position: fixed;
   z-index: 1;
   bottom: 10%;
-  height: 60vh;
+  height: 80vh;
   animation: float 4s ease-in-out infinite;
 }
 
@@ -280,7 +280,7 @@ button {
 @media (max-width: 1000px) {
   .side {
     bottom: 0;
-    height: 25vh;
+    height: 50vh;
   }
 
   .side-left {
