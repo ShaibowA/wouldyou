@@ -220,7 +220,6 @@ button {
   z-index: 1;
   bottom: 10%;
   height: 80vh;
-  animation: float 4s ease-in-out infinite;
 }
 
 .side-left {
