@@ -112,3 +112,24 @@ function getLink(token) {
   return pageUrl + "?t=" + token;
 }
 
+async function submitAnswer(token, answer) {
+  var response = await fetch(baseUrl + "/rest/v1/rpc/submit_answer", {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({
+      p_token: token,
+      p_date: answer.date,
+      p_time: answer.time,
+      p_activities: answer.activities,
+      p_activity_message: answer.activityMessage,
+      p_pickup: answer.pickup,
+      p_place: answer.place,
+      p_message: answer.message
+    })
+  });
+  if (response.ok === false) {
+    var details = await response.text();
+    throw new Error(details);
+  }
+  return await response.json();
+}
