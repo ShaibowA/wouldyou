@@ -18,7 +18,10 @@ function Scene(props) {
       <img className="side side-left" src="assets/img/place/perso_gauche.png" alt="" />
       <img className="side side-right" src="assets/img/place/perso_droite.png" alt="" />
 
-      <main className="card">{props.children}</main>
+      <main className="card">
+        <img className="perch" src="assets/img/place/gojo.png" alt="" />
+        {props.children}
+      </main>
     </div>
   );
 }
@@ -158,17 +161,31 @@ function App() {
         <button className="button-back" onClick={goBack}>← Retour</button>
       </div>
 
+      <p className="badge">📍 Dernière étape</p>
       <h1 className="title">Où veux-tu qu’on se retrouve ?</h1>
 
-      <p className="text">Ecris l'endroit ci-dessous</p>
+      <p className="text">Une adresse, un lieu... comme tu préfères</p>
 
       <input
         className="field place-field"
         type="text"
-        maxLength="1000"
+        maxLength="300"
+        placeholder="Ex : devant le cinéma"
         value={place}
         onChange={changePlace}
       />
+
+      <div className="last">
+        <p className="label">Un petit mot pour la fin ? (facultatif)</p>
+        <input
+          className="field"
+          type="text"
+          maxLength="500"
+          placeholder="Écris ce que tu veux"
+          value={message}
+          onChange={changeMessage}
+        />
+      </div>
 
       {error !== "" ? <p className="error">{error}</p> : null}
 

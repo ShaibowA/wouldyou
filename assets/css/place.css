@@ -241,3 +241,27 @@ input {
   margin-top: 16px;
   margin-bottom: 18px;
 }
+
+.card {
+  margin-top: 120px;
+}
+
+.perch {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 120px;
+  margin-left: -60px;
+  margin-bottom: -6px;
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0 12px 0;
+  padding: 6px 18px;
+  background: rgba(122, 99, 201, 0.15);
+  border-radius: 999px;
+  color: #7a63c9;
+  font-size: 15px;
+  font-weight: 800;
+}
