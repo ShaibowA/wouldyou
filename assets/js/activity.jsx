@@ -4,7 +4,7 @@ var useEffect = React.useEffect;
 var token = new URLSearchParams(window.location.search).get("t");
 
 var PREVIOUS_PAGE = "calend.html";
-var NEXT_PAGE = "lieu.html";
+var NEXT_PAGE = "place.html";
 
 var CHOICES = [
   { emoji: "✨", label: "Catégorie 1" },
