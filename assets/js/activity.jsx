@@ -7,11 +7,11 @@ var PREVIOUS_PAGE = "calend.html";
 var NEXT_PAGE = "place.html";
 
 var CHOICES = [
-  { emoji: "✨", label: "Piscine" },
+  { emoji: "✨", label: "Shopping" },
   { emoji: "✨", label: "Patinoire" },
-  { emoji: "✨", label: "Musée" },
+  { emoji: "✨", label: "Concert" },
   { emoji: "✨", label: "Arcade Games" },
-  { emoji: "✨", label: "Episode 1 de SNK" },
+  { emoji: "✨", label: "Sport" },
   { emoji: "✏️", label: "Autre" }
 ];
 
@@ -34,7 +34,7 @@ function Scene(props) {
       <span className="star star2">✧</span>
 
       <img className="frame frame-left" src="assets/img/activity/kmny.png" alt="" />
-      <img className="frame frame-right" src="assets/img/activity/jjk.png" alt="" />
+      <img className="frame frame-right" src="assets/img/activity/op.png" alt="" />
       <main className="card">{props.children}</main>
     </div>
   );
