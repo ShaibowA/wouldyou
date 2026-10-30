@@ -263,3 +263,10 @@ body {
     display: none;
   }
 }
+
+.choice:disabled,
+.choice:disabled:hover {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}

@@ -41,8 +41,11 @@ function Scene(props) {
 }
 
 function Choice(props) {
-  var className = "choice tone-" + props.tone;
-    if (props.selected === true) {
+  var className = "choice";
+  if (props.tone !== undefined) {
+    className = className + " tone-" + props.tone;
+  }
+  if (props.selected === true) {
     className = className + " selected";
   }
 
@@ -51,7 +54,7 @@ function Choice(props) {
   }
 
   return (
-    <button className={className} onClick={toggle}>
+    <button className={className} disabled={props.disabled} onClick={toggle}>
       <span className="emoji">{props.emoji}</span>
       {props.label}
     </button>
@@ -94,19 +97,35 @@ function App() {
   }, []);
 
   function toggleChoice(label) {
-    var newList = [];
-    var found = false;
-    for (var i = 0; i < chosen.length; i++) {
-      if (chosen[i] === label) {
-        found = true;
-      } else {
-        newList.push(chosen[i]);
+    var isSelected = contains(chosen, label);
+
+    if (isSelected === true) {
+      var newList = [];
+      for (var i = 0; i < chosen.length; i++) {
+        if (chosen[i] !== label) {
+          newList.push(chosen[i]);
+        }
       }
+      setChosen(newList);
+      return;
     }
-    if (found === false) {
-      newList.push(label);
+
+    if (label === "Autre") {
+      if (chosen.length === 0) {
+        setChosen(["Autre"]);
+      }
+      return;
     }
-    setChosen(newList);
+
+    if (contains(chosen, "Autre") === true) {
+      return;
+    }
+
+    if (chosen.length >= 3) {
+      return;
+    }
+
+    setChosen(chosen.concat([label]));
   }
 
   function changeMessage(event) {
@@ -164,13 +183,25 @@ function App() {
   }
 
   var boxes = CHOICES.map(function (choice) {
+    var selected = contains(chosen, choice.label);
+    var disabled = false;
+
+    if (selected === false) {
+      if (choice.label === "Autre") {
+        disabled = chosen.length > 0;
+      } else {
+        disabled = otherSelected === true || chosen.length >= 3;
+      }
+    }
+
     return (
       <Choice
         key={choice.label}
         emoji={choice.emoji}
-        tone={choice.tone}
         label={choice.label}
-        selected={contains(chosen, choice.label)}
+        tone={choice.tone}
+        selected={selected}
+        disabled={disabled}
         onToggle={toggleChoice}
       />
     );
@@ -183,8 +214,7 @@ function App() {
       </div>
 
       <h1 className="title">Tu aimerais faire quoi ?</h1>
-      <p className="text">Tu peux en choisir plusieurs</p>
-
+      <p className="text">Tu peux choisir jusqu'à 3 propositions ou autre</p>
       <div className="choices">{boxes}</div>
 
       {otherSelected ? (
