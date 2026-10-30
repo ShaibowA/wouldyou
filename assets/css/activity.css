@@ -246,9 +246,10 @@ body {
 
 .frame-right {
   right: 0;
-  height: 70vh;
+  height: 60vh;
   clip-path: inset(0 0 0 0);
-  margin-right: 5rem;
+  margin-right: -2rem;
+  margin-top: 8rem;
 }
 
 @media (max-width: 800px) {
