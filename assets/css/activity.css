@@ -69,8 +69,8 @@ body {
 }
 
 .choice {
+  position: relative;
   padding: 18px 10px;
-  background: white;
   border: 2px solid rgba(122, 99, 201, 0.25);
   border-radius: 18px;
   color: #1d2147;
@@ -78,12 +78,33 @@ body {
   font-size: 17px;
   font-weight: 800;
   cursor: pointer;
+  transition: transform 0.15s;
 }
+
+.choice:hover {
+  transform: translateY(-3px);
+}
+
+.tone-pink { background: #ffe3f0; border-color: #ffb6dc; }
+.tone-blue { background: #e0ecff; border-color: #8fb4ff; }
+.tone-purple { background: #ece4ff; border-color: #b9a4f5; }
+.tone-yellow { background: #fff3d6; border-color: #ffd98a; }
+.tone-green { background: #dff7ea; border-color: #9ddfb9; }
+.tone-white { background: white; }
 
 .choice.selected {
   background: #1d2147;
   border-color: #1d2147;
   color: white;
+}
+
+.choice.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  color: #ffb6dc;
+  font-size: 18px;
 }
 
 .emoji {
@@ -139,11 +160,11 @@ body {
 }
 
 .side-left {
-  left: 6%;
+  left: 18%;
 }
 
 .side-right {
-  right: 6%;
+  right: 18%;
   animation-delay: -2s;
 }
 
@@ -219,13 +240,15 @@ body {
   left: 0;
   height: 70vh;
   top: 10%;
-  clip-path: inset(0 0% 0 0);
+  clip-path: inset(0 0 0 0);
+  margin-left: 7rem;
 }
 
 .frame-right {
   right: 0;
   height: 110vh;
-  clip-path: inset(0 0 0 0%);
+  clip-path: inset(0 0 0 0);
+  margin-right: 5rem;
 }
 
 @media (max-width: 800px) {

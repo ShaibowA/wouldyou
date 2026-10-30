@@ -41,8 +41,8 @@ function Scene(props) {
 }
 
 function Choice(props) {
-  var className = "choice";
-  if (props.selected === true) {
+  var className = "choice tone-" + props.tone;
+    if (props.selected === true) {
     className = className + " selected";
   }
 
@@ -168,6 +168,7 @@ function App() {
       <Choice
         key={choice.label}
         emoji={choice.emoji}
+        tone={choice.tone}
         label={choice.label}
         selected={contains(chosen, choice.label)}
         onToggle={toggleChoice}
