@@ -133,3 +133,16 @@ async function submitAnswer(token, answer) {
   }
   return await response.json();
 }
+
+async function sendNo(token) {
+  var response = await fetch(baseUrl + "/rest/v1/rpc/submit_no", {
+    method: "POST",
+    headers: getHeaders(),
+    body: JSON.stringify({ p_token: token })
+  });
+  if (response.ok === false) {
+    var details = await response.text();
+    throw new Error(details);
+  }
+  return await response.json();
+}

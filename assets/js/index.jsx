@@ -41,7 +41,6 @@ function Invitation(props) {
 function App() {
   var [status, setStatus] = useState("loading");
   var [name, setName] = useState("");
-  var [declined, setDeclined] = useState(false);
 
   useEffect(function () {
     async function checkLink() {
@@ -53,6 +52,8 @@ function App() {
         var invitation = await openInvitation(token);
         if (invitation === null) {
           setStatus("invalid");
+        } else if (invitation.answered === true && invitation.answer === "no") {
+          window.location.href = "none.html?t=" + encodeURIComponent(token);
         } else if (invitation.answered === true) {
           setStatus("answered");
         } else {
@@ -70,12 +71,13 @@ function App() {
     window.location.href = "calend.html?t=" + encodeURIComponent(token);
   }
 
-  function sayNo() {
-    setDeclined(true);
-  }
-
-  function sayOops() {
-    setDeclined(false);
+  async function sayNo() {
+    try {
+      await sendNo(token);
+      window.location.href = "none.html?t=" + encodeURIComponent(token);
+    } catch (error) {
+      alert("Oups, réessaie dans un instant.");
+    }
   }
 
   if (status === "loading") {
@@ -98,19 +100,6 @@ function App() {
     return (
       <Card>
         <p className="message">Tu as déjà répondu au formulaire, si jamais tu as une question tu peux directement m’écrire sur mon numéro</p>
-      </Card>
-    );
-  }
-
-  if (declined === true) {
-    return (
-      <Card>
-        <p className="message">orh zebi bon pg</p>
-        <div className="buttons">
-          <button className="button button-outline" onClick={sayOops}>
-            Retour 
-          </button>
-        </div>
       </Card>
     );
   }
