@@ -252,19 +252,6 @@ body {
   margin-top: 10rem;
 }
 
-@media (max-width: 800px) {
-  .frame {
-    width: 100vw;
-    height: 25vh;
-    object-fit: cover;
-    clip-path: none;
-  }
-
-  .frame-right {
-    display: none;
-  }
-}
-
 .choice:disabled,
 .choice:disabled:hover {
   opacity: 0.35;
