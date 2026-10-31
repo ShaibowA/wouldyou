@@ -3,6 +3,13 @@ var useEffect = React.useEffect;
 
 var token = new URLSearchParams(window.location.search).get("t");
 
+var CALENDAR_PAGE = "calend.html";
+var NONE_PAGE = "none.html";
+
+var LEFT_IMAGE = "assets/img/index/MHA_turret.png";
+var RIGHT_IMAGE = "assets/img/index/hxh_turret.png";
+var MASCOT_IMAGE = "assets/img/index/squirtle_flower.png";
+
 function Card(props) {
   return (
     <div className="page">
@@ -12,8 +19,8 @@ function Card(props) {
       <span className="star star1">✦</span>
       <span className="star star2">✧</span>
 
-      <img className="side side-left" src="assets/img/index/MHA_turret.png" alt="" />
-      <img className="side side-right" src="assets/img/index/hxh_turret.png" alt="" />
+      <img className="side side-left" src={LEFT_IMAGE} alt="" />
+      <img className="side side-right" src={RIGHT_IMAGE} alt="" />
 
       <main className="card">{props.children}</main>
     </div>
@@ -23,15 +30,15 @@ function Card(props) {
 function Invitation(props) {
   return (
     <div>
-      <img className="mascot" src="assets/img/index/squirtle_flower.png" alt="" />
-      <h1 className="title">Hello {props.name} !</h1>
+      <img className="mascot" src={MASCOT_IMAGE} alt="" />
+      <h1 className="title">Coucou {props.name} !</h1>
       <p className="message">Est-ce que tu voudrais sortir un de ces quatre ?</p>
       <div className="buttons">
         <button className="button button-yes" onClick={props.onYes}>
-          Oui
+          Avec plaisir ! ♥
         </button>
-        <button className="button button-outline" onClick={props.onNo}>
-          Non 
+        <button className="button button-outline" disabled={props.sending} onClick={props.onNo}>
+          Une autre fois
         </button>
       </div>
     </div>
@@ -41,6 +48,7 @@ function Invitation(props) {
 function App() {
   var [status, setStatus] = useState("loading");
   var [name, setName] = useState("");
+  var [sending, setSending] = useState(false);
 
   useEffect(function () {
     async function checkLink() {
@@ -53,7 +61,7 @@ function App() {
         if (invitation === null) {
           setStatus("invalid");
         } else if (invitation.answered === true && invitation.answer === "no") {
-          window.location.href = "none.html?t=" + encodeURIComponent(token);
+          window.location.href = NONE_PAGE + "?t=" + encodeURIComponent(token);
         } else if (invitation.answered === true) {
           setStatus("answered");
         } else {
@@ -68,14 +76,19 @@ function App() {
   }, []);
 
   function goToCalendar() {
-    window.location.href = "calend.html?t=" + encodeURIComponent(token);
+    window.location.href = CALENDAR_PAGE + "?t=" + encodeURIComponent(token);
   }
 
   async function sayNo() {
+    if (sending === true) {
+      return;
+    }
+    setSending(true);
     try {
       await sendNo(token);
-      window.location.href = "none.html?t=" + encodeURIComponent(token);
+      window.location.href = NONE_PAGE + "?t=" + encodeURIComponent(token);
     } catch (error) {
+      setSending(false);
       alert("Oups, réessaie dans un instant.");
     }
   }
@@ -106,7 +119,7 @@ function App() {
 
   return (
     <Card>
-      <Invitation name={name} onYes={goToCalendar} onNo={sayNo} />
+      <Invitation name={name} sending={sending} onYes={goToCalendar} onNo={sayNo} />
     </Card>
   );
 }
