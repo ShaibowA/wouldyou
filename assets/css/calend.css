@@ -300,3 +300,9 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+@media (max-width: 800px) {
+  .side {
+    display: none;
+  }
+}

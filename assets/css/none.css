@@ -157,3 +157,9 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
+
+@media (max-width: 800px) {
+  .side {
+    display: none;
+  }
+}

@@ -306,3 +306,9 @@ input {
   font-weight: 800;
   cursor: pointer;
 }
+
+@media (max-width: 800px) {
+  .side {
+    display: none;
+  }
+}

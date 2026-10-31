@@ -153,3 +153,9 @@ body {
     right: 2%;
   }
 }
+
+@media (max-width: 800px) {
+  .side {
+    display: none;
+  }
+}

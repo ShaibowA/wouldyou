@@ -271,3 +271,9 @@ body {
   cursor: not-allowed;
   transform: none;
 }
+
+@media (max-width: 800px) {
+  .side {
+    display: none;
+  }
+}
