@@ -35,10 +35,10 @@ function Invitation(props) {
       <p className="message">Est-ce que tu voudrais sortir un de ces quatre ?</p>
       <div className="buttons">
         <button className="button button-yes" onClick={props.onYes}>
-          Avec plaisir ! ♥
+          Oui
         </button>
         <button className="button button-outline" disabled={props.sending} onClick={props.onNo}>
-          Une autre fois
+          NON !
         </button>
       </div>
     </div>

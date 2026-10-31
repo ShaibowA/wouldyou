@@ -241,7 +241,7 @@ function App() {
   if (status === "answered") {
     return (
       <Scene>
-        <p className="title">Tu as déjà répondu 💌</p>
+        <p className="title">J'ai anticipé cette action, tu as déjà dis non</p>
       </Scene>
     );
   }

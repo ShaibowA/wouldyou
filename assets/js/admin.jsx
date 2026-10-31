@@ -36,9 +36,10 @@ function Invitation(props) {
     if (item.message !== null && item.message !== "") {
       details = details + "\nMessage : " + item.message;
     }
-    if (item.answer === "no") {
-    status = "❌ A dit NON";
   }
+  
+  if (item.answer === "no") {
+    status = "❌ A dit NON";
   }
 
     var openedText = "";
