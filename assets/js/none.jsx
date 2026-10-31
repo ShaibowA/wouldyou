@@ -75,13 +75,6 @@ function App() {
   }
 
   if (status === "answered") {
-    return (
-      <Scene>
-        <p className="title">Tu as déjà répondu</p>
-      </Scene>
-    );
-  }
-
   return (
     <Scene>
       <p className="big-emoji">😔</p>
@@ -89,6 +82,7 @@ function App() {
       <p className="text">Merci d’avoir été honnête, pas de souci.</p>
     </Scene>
   );
+}
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
